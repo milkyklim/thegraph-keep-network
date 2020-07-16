@@ -1,0 +1,466 @@
+[
+  {
+    "stateMutability": "nonpayable",
+    "inputs": [
+      { "type": "address", "name": "_tokenAddress", "internalType": "address" }
+    ],
+    "type": "constructor",
+    "payable": false
+  },
+  {
+    "inputs": [
+      {
+        "indexed": true,
+        "type": "address",
+        "name": "grantManager",
+        "internalType": "address"
+      },
+      {
+        "indexed": false,
+        "type": "address",
+        "name": "stakingContract",
+        "internalType": "address"
+      }
+    ],
+    "type": "event",
+    "name": "StakingContractAuthorized",
+    "anonymous": false
+  },
+  {
+    "inputs": [
+      {
+        "indexed": false,
+        "type": "uint256",
+        "name": "id",
+        "internalType": "uint256"
+      }
+    ],
+    "type": "event",
+    "name": "TokenGrantCreated",
+    "anonymous": false
+  },
+  {
+    "inputs": [
+      {
+        "indexed": false,
+        "type": "uint256",
+        "name": "id",
+        "internalType": "uint256"
+      }
+    ],
+    "type": "event",
+    "name": "TokenGrantRevoked",
+    "anonymous": false
+  },
+  {
+    "inputs": [
+      {
+        "indexed": true,
+        "type": "uint256",
+        "name": "grantId",
+        "internalType": "uint256"
+      },
+      {
+        "indexed": false,
+        "type": "uint256",
+        "name": "amount",
+        "internalType": "uint256"
+      },
+      {
+        "indexed": false,
+        "type": "address",
+        "name": "operator",
+        "internalType": "address"
+      }
+    ],
+    "type": "event",
+    "name": "TokenGrantStaked",
+    "anonymous": false
+  },
+  {
+    "inputs": [
+      {
+        "indexed": true,
+        "type": "uint256",
+        "name": "grantId",
+        "internalType": "uint256"
+      },
+      {
+        "indexed": false,
+        "type": "uint256",
+        "name": "amount",
+        "internalType": "uint256"
+      }
+    ],
+    "type": "event",
+    "name": "TokenGrantWithdrawn",
+    "anonymous": false
+  },
+  {
+    "inputs": [
+      {
+        "type": "address",
+        "name": "_stakingContract",
+        "internalType": "address"
+      }
+    ],
+    "constant": false,
+    "name": "authorizeStakingContract",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "uint256", "name": "_grantId", "internalType": "uint256" }
+    ],
+    "constant": true,
+    "name": "availableToStake",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "address", "name": "_owner", "internalType": "address" }
+    ],
+    "constant": true,
+    "name": "balanceOf",
+    "outputs": [
+      { "type": "uint256", "name": "balance", "internalType": "uint256" }
+    ],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [{ "type": "address", "name": "", "internalType": "address" }],
+    "constant": true,
+    "name": "balances",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "address", "name": "_operator", "internalType": "address" }
+    ],
+    "constant": false,
+    "name": "cancelRevokedStake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "address", "name": "_operator", "internalType": "address" }
+    ],
+    "constant": false,
+    "name": "cancelStake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [{ "type": "uint256", "name": "_id", "internalType": "uint256" }],
+    "constant": true,
+    "name": "getGrant",
+    "outputs": [
+      { "type": "uint256", "name": "amount", "internalType": "uint256" },
+      { "type": "uint256", "name": "withdrawn", "internalType": "uint256" },
+      { "type": "uint256", "name": "staked", "internalType": "uint256" },
+      { "type": "uint256", "name": "revokedAmount", "internalType": "uint256" },
+      { "type": "uint256", "name": "revokedAt", "internalType": "uint256" },
+      { "type": "address", "name": "grantee", "internalType": "address" }
+    ],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "address", "name": "operator", "internalType": "address" }
+    ],
+    "constant": true,
+    "name": "getGrantStakeDetails",
+    "outputs": [
+      { "type": "uint256", "name": "grantId", "internalType": "uint256" },
+      { "type": "uint256", "name": "amount", "internalType": "uint256" },
+      {
+        "type": "address",
+        "name": "stakingContract",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [{ "type": "uint256", "name": "_id", "internalType": "uint256" }],
+    "constant": true,
+    "name": "getGrantUnlockingSchedule",
+    "outputs": [
+      { "type": "address", "name": "grantManager", "internalType": "address" },
+      { "type": "uint256", "name": "duration", "internalType": "uint256" },
+      { "type": "uint256", "name": "start", "internalType": "uint256" },
+      { "type": "uint256", "name": "cliff", "internalType": "uint256" },
+      { "type": "address", "name": "policy", "internalType": "address" }
+    ],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "address", "name": "grantee", "internalType": "address" }
+    ],
+    "constant": true,
+    "name": "getGranteeOperators",
+    "outputs": [
+      { "type": "address[]", "name": "", "internalType": "address[]" }
+    ],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "type": "address",
+        "name": "_granteeOrGrantManager",
+        "internalType": "address"
+      }
+    ],
+    "constant": true,
+    "name": "getGrants",
+    "outputs": [
+      { "type": "uint256[]", "name": "", "internalType": "uint256[]" }
+    ],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "address", "name": "", "internalType": "address" },
+      { "type": "uint256", "name": "", "internalType": "uint256" }
+    ],
+    "constant": true,
+    "name": "grantIndices",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [{ "type": "address", "name": "", "internalType": "address" }],
+    "constant": true,
+    "name": "grantStakes",
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "contract TokenGrantStake"
+      }
+    ],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "address", "name": "", "internalType": "address" },
+      { "type": "uint256", "name": "", "internalType": "uint256" }
+    ],
+    "constant": true,
+    "name": "granteesToOperators",
+    "outputs": [{ "type": "address", "name": "", "internalType": "address" }],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "constant": true,
+    "name": "grants",
+    "outputs": [
+      { "type": "address", "name": "grantManager", "internalType": "address" },
+      { "type": "address", "name": "grantee", "internalType": "address" },
+      { "type": "uint256", "name": "revokedAt", "internalType": "uint256" },
+      { "type": "uint256", "name": "revokedAmount", "internalType": "uint256" },
+      {
+        "type": "uint256",
+        "name": "revokedWithdrawn",
+        "internalType": "uint256"
+      },
+      { "type": "bool", "name": "revocable", "internalType": "bool" },
+      { "type": "uint256", "name": "amount", "internalType": "uint256" },
+      { "type": "uint256", "name": "duration", "internalType": "uint256" },
+      { "type": "uint256", "name": "start", "internalType": "uint256" },
+      { "type": "uint256", "name": "cliff", "internalType": "uint256" },
+      { "type": "uint256", "name": "withdrawn", "internalType": "uint256" },
+      { "type": "uint256", "name": "staked", "internalType": "uint256" },
+      {
+        "type": "address",
+        "name": "stakingPolicy",
+        "internalType": "contract GrantStakingPolicy"
+      }
+    ],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "constant": true,
+    "name": "numGrants",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "address", "name": "_from", "internalType": "address" },
+      { "type": "uint256", "name": "_amount", "internalType": "uint256" },
+      { "type": "address", "name": "_token", "internalType": "address" },
+      { "type": "bytes", "name": "_extraData", "internalType": "bytes" }
+    ],
+    "constant": false,
+    "name": "receiveApproval",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "address", "name": "_operator", "internalType": "address" }
+    ],
+    "constant": false,
+    "name": "recoverStake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [{ "type": "uint256", "name": "_id", "internalType": "uint256" }],
+    "constant": false,
+    "name": "revoke",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "uint256", "name": "_id", "internalType": "uint256" },
+      {
+        "type": "address",
+        "name": "_stakingContract",
+        "internalType": "address"
+      },
+      { "type": "uint256", "name": "_amount", "internalType": "uint256" },
+      { "type": "bytes", "name": "_extraData", "internalType": "bytes" }
+    ],
+    "constant": false,
+    "name": "stake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "address", "name": "_address", "internalType": "address" }
+    ],
+    "constant": true,
+    "name": "stakeBalanceOf",
+    "outputs": [
+      { "type": "uint256", "name": "balance", "internalType": "uint256" }
+    ],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "constant": true,
+    "name": "token",
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "contract ERC20Burnable"
+      }
+    ],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "address", "name": "_operator", "internalType": "address" }
+    ],
+    "constant": false,
+    "name": "undelegate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "type": "address", "name": "_operator", "internalType": "address" }
+    ],
+    "constant": false,
+    "name": "undelegateRevoked",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [{ "type": "uint256", "name": "_id", "internalType": "uint256" }],
+    "constant": true,
+    "name": "unlockedAmount",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [{ "type": "uint256", "name": "_id", "internalType": "uint256" }],
+    "constant": false,
+    "name": "withdraw",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [{ "type": "uint256", "name": "_id", "internalType": "uint256" }],
+    "constant": false,
+    "name": "withdrawRevoked",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "inputs": [{ "type": "uint256", "name": "_id", "internalType": "uint256" }],
+    "constant": true,
+    "name": "withdrawable",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "stateMutability": "view",
+    "payable": false,
+    "type": "function"
+  }
+]

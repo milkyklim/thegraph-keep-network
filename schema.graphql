@@ -1,6 +1,49 @@
-type Gravatar @entity {
+type StakingContract @entity {
+  "Staking contract address"
   id: ID!
-  owner: Bytes!
-  displayName: String!
-  imageUrl: String!
+}
+
+interface Action @entity {
+  "Equals to: <Grant ID>-<Transaction Hash>"
+  id: ID!
+  "Raw keep amount"
+  amount: BigInt!
+  "On-chain token grant id"
+  grantId: Grant!
+}
+
+type Stake implements Action @entity {
+  "Equals to: <Grant ID>-<Transaction Hash>"
+  id: ID!
+  "Raw keep amount"
+  amount: BigInt!
+  "On-chain token grant id"
+  grantId: Grant!
+}
+
+type Withdrawal implements Action @entity {
+  "Equals to: <Grant ID>-<Transaction Hash>"
+  id: ID!
+  "Raw keep amount"
+  amount: BigInt!
+  "On-chain token grant id"
+  grantId: Grant!
+}
+
+enum GrantStatus {
+  ACTIVE
+  REVOKED
+}
+
+type Grant @entity {
+  "On-chain token grant id"
+  id: ID!
+  "Stakes associated with grant"
+  stakes: [Stake!] @derivedFrom(field: "grantId")
+  "Withdrawals associated with grant"
+  withdrawals: [Withdrawal!] @derivedFrom(field: "grantId")
+  "Token grant status (ACTIVE/REVOKED)"
+  status: GrantStatus!
+  "Operator address"
+  operator: Bytes
 }
