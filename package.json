@@ -2,23 +2,30 @@
   "name": "keep-network",
   "version": "0.1.0",
   "scripts": {
-    "build-contract": "solc contracts/Gravity.sol --abi -o abis --overwrite && solc contracts/Gravity.sol --bin -o bin --overwrite",
-    "create": "graph create milkyklim/keep-network --node https://api.thegraph.com/deploy/",
-    "create-local": "graph create milkyklim/keep-network --node http://127.0.0.1:8020",
+    "prepare:mainnet": "mustache config/mainnet.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:ropsten": "mustache config/ropsten.json subgraph.template.yaml > subgraph.yaml",
+    "create:mainnet": "graph create milkyklim/keep-network --node https://api.thegraph.com/deploy/",
+    "create:ropsten": "graph create milkyklim/keep-network-ropsten --node https://api.thegraph.com/deploy/",
+    "create-local:mainnet": "graph create milkyklim/keep-network --node http://127.0.0.1:8020",
+    "create-local:ropsten": "graph create milkyklim/keep-network-ropsten --node http://127.0.0.1:8020",
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy milkyklim/keep-network --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
-    "deploy-local": "graph deploy milkyklim/keep-network --ipfs http://localhost:5001 --node http://127.0.0.1:8020"
+    "deploy:mainnet": "graph deploy milkyklim/keep-network --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "deploy:ropsten": "graph deploy milkyklim/keep-network-ropsten --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "deploy-local:mainnet": "graph deploy milkyklim/keep-network --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
+    "deploy-local:ropsten": "graph deploy milkyklim/keep-network-ropsten --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
+    "publish-graph": "yarn prepare:$NETWORK && yarn codegen && yarn deploy:$NETWORK"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.18.0",
     "@graphprotocol/graph-ts": "^0.18.1",
     "@typescript-eslint/eslint-plugin": "^3.6.1",
     "@typescript-eslint/parser": "^3.6.1",
+    "eslint": "^7.4.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-simple-import-sort": "^5.0.3",
-    "eslint": "^7.4.0",
+    "mustache": "^4.0.1",
     "prettier": "^2.0.5"
   }
 }

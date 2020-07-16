@@ -6,11 +6,12 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: TokenGrant
-    network: mainnet
+    network: "{{ network }}"
     source:
-      address: '0x175989c71fd023d580c65f5dc214002687ff88b7'
+      address: "{{ address }}"
       abi: TokenGrant
-      startBlock: 9958365
+      # prettier-ignore
+      startBlock: {{ startBlock }}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
