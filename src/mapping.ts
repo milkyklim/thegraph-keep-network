@@ -1,5 +1,11 @@
-import { StakingContractAuthorized, TokenGrantCreated, TokenGrantRevoked, TokenGrantStaked, TokenGrantWithdrawn } from '../generated/TokenGrant/TokenGrant'
-import { Grant, StakingContract, Stake, Withdrawal } from '../generated/schema'
+import { Grant, Stake, StakingContract, Withdrawal } from '../generated/schema'
+import {
+  StakingContractAuthorized,
+  TokenGrantCreated,
+  TokenGrantRevoked,
+  TokenGrantStaked,
+  TokenGrantWithdrawn,
+} from '../generated/TokenGrant/TokenGrant'
 import { createId } from './utils'
 
 export function handleStakingContractAuthorized(event: StakingContractAuthorized): void {
@@ -16,6 +22,7 @@ export function handleTokenGrantCreated(event: TokenGrantCreated): void {
 
 export function handleTokenGrantStaked(event: TokenGrantStaked): void {
   let stakeId = createId(event.params.grantId, event.transaction.hash)
+  // @ts-ignore: assign wrapper object to primitive
   let stake = new Stake(stakeId)
   let grant = Grant.load(event.params.grantId.toString())
 
@@ -26,6 +33,7 @@ export function handleTokenGrantStaked(event: TokenGrantStaked): void {
 
 export function handleTokenGrantWithdrawn(event: TokenGrantWithdrawn): void {
   let withdrawalId = createId(event.params.grantId, event.transaction.hash)
+  // @ts-ignore: assign wrapper object to primitive
   let withdrawal = new Withdrawal(withdrawalId)
   let grant = Grant.load(event.params.grantId.toString())
 
