@@ -64,3 +64,5 @@ typings/
 **generated
 **build
 
+# vscode settings
+.vscode
