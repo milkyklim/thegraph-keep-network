@@ -66,3 +66,6 @@ typings/
 
 # vscode settings
 .vscode
+
+# network specific configurations
+subgraph.yaml
