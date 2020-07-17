@@ -1,6 +1,16 @@
+type Transaction @entity {
+  "Transaction hash"
+  id: ID!
+  "Block number"
+  block: BigInt!
+  timestamp: BigInt!
+}
+
 type StakingContract @entity {
   "Staking contract address"
   id: ID!
+  "Creation transaction"
+  transaction: Transaction!
 }
 
 interface Action @entity {
@@ -10,6 +20,7 @@ interface Action @entity {
   amount: BigInt!
   "On-chain token grant id"
   grantId: Grant!
+  transaction: Transaction!
 }
 
 type Stake implements Action @entity {
@@ -19,6 +30,7 @@ type Stake implements Action @entity {
   amount: BigInt!
   "On-chain token grant id"
   grantId: Grant!
+  transaction: Transaction!
 }
 
 type Withdrawal implements Action @entity {
@@ -28,11 +40,12 @@ type Withdrawal implements Action @entity {
   amount: BigInt!
   "On-chain token grant id"
   grantId: Grant!
+  transaction: Transaction!
 }
 
 enum GrantStatus {
-  ACTIVE
-  REVOKED
+  Active
+  Revoked
 }
 
 type Grant @entity {
@@ -42,8 +55,10 @@ type Grant @entity {
   stakes: [Stake!] @derivedFrom(field: "grantId")
   "Withdrawals associated with grant"
   withdrawals: [Withdrawal!] @derivedFrom(field: "grantId")
-  "Token grant status (ACTIVE/REVOKED)"
+  "Token grant status (Active/Revoked)"
   status: GrantStatus!
   "Operator address"
   operator: Bytes
+  "Creation transaction"
+  transaction: Transaction!
 }
