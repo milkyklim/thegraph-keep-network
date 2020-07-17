@@ -26,7 +26,7 @@ jobs:
       - name: Run pre-commit
         uses: pre-commit/action@v2.0.0
 
-  deploy-mainnet:
+  build-both:
     runs-on: ubuntu-latest
 
     steps:
@@ -52,64 +52,6 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
-      - name: Set ethereum network
-        run: |
-          echo "::set-env name=NETWORK::mainnet"
-          echo "::set-env name=GRAPH_PATH::milkyklim/keep-network"
-
-      - name: Install dependencies
-        run: yarn --frozen-lockfile
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-
-      # library is not restored from path correctly
-      - name: Add mustache
-        run: yarn add mustache --dev
-
-      - name: Create network specifications
-        run: yarn prepare:network
-
-      - name: Generate and build subgraph
-        run: |
-          yarn codegen
-          yarn build
-      #
-      # - name: Deploy subgraph
-      #   run: yarn deploy
-      #   env:
-      #     ACCESS_TOKEN: ${{ secrets.THE_GRAPH_ACCESS_TOKEN}}
-
-  deploy-ropsten:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out github repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-
-      - name: Install node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-
-      - name: Set yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Restore cache
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Set ethereum network
-        run: |
-          echo "::set-env name=NETWORK::ropsten"
-          echo "::set-env name=GRAPH_PATH::milkyklim/keep-network-ropsten"
 
       - name: Install dependencies
         run: yarn --frozen-lockfile
@@ -119,15 +61,20 @@ jobs:
       - name: Add mustache
         run: yarn add mustache --dev
 
-      - name: Create network specifications
-        run: yarn prepare:network
-
-      - name: Generate and build subgraph
+      - name: Build ropsten
+        env:
+          NETWORK: ropsten
+          GRAPH_PATH: milkyklim/keep-network-ropsten
         run: |
+          yarn prepare:network
           yarn codegen
           yarn build
-      #
-      # - name: Deploy subgraph
-      #   run: yarn deploy
-      #   env:
-      #     ACCESS_TOKEN: ${{ secrets.THE_GRAPH_ACCESS_TOKEN}}
+
+      - name: Build mainnet
+        env:
+          NETWORK: mainnet
+          GRAPH_PATH: milkyklim/keep-network
+        run: |
+          yarn prepare:network
+          yarn codegen
+          yarn build
