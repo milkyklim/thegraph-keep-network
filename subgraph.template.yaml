@@ -6,9 +6,9 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: TokenGrant
-    network: "{{ network }}"
+    network: '{{ network }}'
     source:
-      address: "{{ address }}"
+      address: '{{ address }}'
       abi: TokenGrant
       # prettier-ignore
       startBlock: {{ startBlock }}
