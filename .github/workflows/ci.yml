@@ -1,6 +1,12 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   pre-commit:
@@ -67,11 +73,11 @@ jobs:
         run: |
           yarn codegen
           yarn build
-
-      - name: Deploy subgraph
-        run: yarn deploy
-        env:
-          ACCESS_TOKEN: ${{ secrets.THE_GRAPH_ACCESS_TOKEN}}
+      #
+      # - name: Deploy subgraph
+      #   run: yarn deploy
+      #   env:
+      #     ACCESS_TOKEN: ${{ secrets.THE_GRAPH_ACCESS_TOKEN}}
 
   deploy-ropsten:
     runs-on: ubuntu-latest
@@ -120,8 +126,8 @@ jobs:
         run: |
           yarn codegen
           yarn build
-
-      - name: Deploy subgraph
-        run: yarn deploy
-        env:
-          ACCESS_TOKEN: ${{ secrets.THE_GRAPH_ACCESS_TOKEN}}
+      #
+      # - name: Deploy subgraph
+      #   run: yarn deploy
+      #   env:
+      #     ACCESS_TOKEN: ${{ secrets.THE_GRAPH_ACCESS_TOKEN}}
