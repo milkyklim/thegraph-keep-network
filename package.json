@@ -2,12 +2,12 @@
   "name": "keep-network",
   "version": "0.1.0",
   "scripts": {
-    "prepare": "mustache config/$NETWORK.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:network": "mustache config/$NETWORK.json subgraph.template.yaml > subgraph.yaml",
     "create": "graph create $GRAPH_PATH --node https://api.thegraph.com/deploy/",
     "create-local": "graph create $GRAPH_PATH --node http://127.0.0.1:8020",
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy $GRAPH_PATH --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "deploy": "graph deploy $GRAPH_PATH --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token $ACCESS_TOKEN",
     "deploy-local": "graph deploy $GRAPH_PATH --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
     "publish-graph": "yarn prepare && yarn codegen && yarn build && yarn deploy"
   },
