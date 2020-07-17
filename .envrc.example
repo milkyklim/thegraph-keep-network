@@ -1,0 +1,2 @@
+export NETWORK="mainnet"
+export GRAPH_PATH="milkyklim/keep-network"
