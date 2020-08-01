@@ -49,8 +49,10 @@ enum GrantStatus {
 }
 
 type Grant @entity {
-  "On-chain token grant id"
+  "DB id (On-chain token grant id)"
   id: ID!
+  "On-chain token grant id"
+  grant_id: BigInt!
   "Stakes associated with grant"
   stakes: [Stake!] @derivedFrom(field: "grantId")
   "Withdrawals associated with grant"

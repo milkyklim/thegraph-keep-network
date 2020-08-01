@@ -34,6 +34,7 @@ export function handleTokenGrantCreated(event: TokenGrantCreated): void {
   if (transaction == null) {
     transaction = createTransaction(event.transaction, event.block)
   }
+  grant.grant_id = event.params.id
   grant.status = 'Active'
   grant.transaction = transaction.id
 
