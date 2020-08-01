@@ -9,7 +9,7 @@
     "build": "graph build",
     "deploy": "graph deploy $GRAPH_PATH --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token $ACCESS_TOKEN",
     "deploy-local": "graph deploy $GRAPH_PATH --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
-    "publish-graph": "yarn prepare && yarn codegen && yarn build && yarn deploy"
+    "publish-graph": "yarn prepare:network && yarn codegen && yarn build && yarn deploy"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.18.0",
