@@ -14,7 +14,7 @@ Live versions:
 
 - Copy `.envrc.example` to `.envrc`.
 - Set your The Graph `ACCESS_TOKEN`.
-- Set network evrinorment variables:
+- Set network environment variables:
 
 Ropsten:
 

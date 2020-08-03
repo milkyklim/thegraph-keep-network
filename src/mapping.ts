@@ -52,11 +52,13 @@ export function handleTokenGrantStaked(event: TokenGrantStaked): void {
   if (transaction == null) {
     transaction = createTransaction(event.transaction, event.block)
   }
+  grant.operator = event.params.operator
   stake.grantId = grant.id
   stake.amount = event.params.amount
   stake.transaction = transaction.id
 
   transaction.save()
+  grant.save()
   stake.save()
 }
 
