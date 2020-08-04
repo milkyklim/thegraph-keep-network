@@ -18,8 +18,7 @@ interface Action @entity {
   id: ID!
   "Raw keep amount"
   amount: BigInt!
-  "On-chain token grant id"
-  grantId: Grant!
+  grant: Grant!
   transaction: Transaction!
 }
 
@@ -28,8 +27,7 @@ type Stake implements Action @entity {
   id: ID!
   "Raw keep amount"
   amount: BigInt!
-  "On-chain token grant id"
-  grantId: Grant!
+  grant: Grant!
   transaction: Transaction!
 }
 
@@ -38,8 +36,7 @@ type Withdrawal implements Action @entity {
   id: ID!
   "Raw keep amount"
   amount: BigInt!
-  "On-chain token grant id"
-  grantId: Grant!
+  grant: Grant!
   transaction: Transaction!
 }
 
@@ -54,9 +51,9 @@ type Grant @entity {
   "On-chain token grant id"
   grant_id: BigInt!
   "Stakes associated with grant"
-  stakes: [Stake!] @derivedFrom(field: "grantId")
+  stakes: [Stake!] @derivedFrom(field: "grant")
   "Withdrawals associated with grant"
-  withdrawals: [Withdrawal!] @derivedFrom(field: "grantId")
+  withdrawals: [Withdrawal!] @derivedFrom(field: "grant")
   "Token grant status (Active/Revoked)"
   status: GrantStatus!
   "Operator address"

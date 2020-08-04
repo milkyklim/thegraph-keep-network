@@ -53,7 +53,7 @@ export function handleTokenGrantStaked(event: TokenGrantStaked): void {
     transaction = createTransaction(event.transaction, event.block)
   }
   grant.operator = event.params.operator
-  stake.grantId = grant.id
+  stake.grant = grant.id
   stake.amount = event.params.amount
   stake.transaction = transaction.id
 
@@ -72,7 +72,7 @@ export function handleTokenGrantWithdrawn(event: TokenGrantWithdrawn): void {
   if (transaction == null) {
     transaction = createTransaction(event.transaction, event.block)
   }
-  withdrawal.grantId = grant.id
+  withdrawal.grant = grant.id
   withdrawal.amount = event.params.amount
   withdrawal.transaction = transaction.id
 
