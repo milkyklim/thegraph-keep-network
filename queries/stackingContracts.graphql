@@ -1,0 +1,11 @@
+# List of staking contracts
+{
+  stakingContracts {
+    id
+    transaction {
+      id
+      block
+      timestamp
+    }
+  }
+}

@@ -1,0 +1,12 @@
+# Random 10 withdrawals
+{
+  withdrawals(first: 10) {
+    amount
+    grant {
+      grant_id
+      transaction {
+        id
+      }
+    }
+  }
+}

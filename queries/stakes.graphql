@@ -1,0 +1,12 @@
+# Random 10 stakes
+{
+  stakes(first: 10) {
+    amount
+    grant {
+      grant_id
+      transaction {
+        id
+      }
+    }
+  }
+}

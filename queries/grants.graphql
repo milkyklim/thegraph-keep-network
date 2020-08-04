@@ -1,0 +1,23 @@
+# First 10 grants ordered by ID
+{
+  grants(first: 10, orderBy: grant_id, orderDirection: desc) {
+    grant_id
+    transaction {
+      id
+    }
+    operator
+    status
+    stakes {
+      amount
+      transaction {
+        id
+      }
+    }
+    withdrawals {
+      amount
+      transaction {
+        id
+      }
+    }
+  }
+}
