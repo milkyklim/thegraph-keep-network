@@ -33,6 +33,7 @@ GRAPH_PATH="milkyklim/keep-network"
 # Running
 
 - `yarn` – install dependencies
+- `yarn prepare:network` - generate `subgraph.yaml` for specific network
 - `yarn codegen` – generate code
 - `yarn create` – allocate subgraph name in Graph Node
 - `yarn deploy` - deploy supgraph to Graph Node
